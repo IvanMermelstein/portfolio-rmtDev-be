@@ -1,6 +1,17 @@
 import { model, Schema } from "mongoose";
+import { authentication } from "../helpers/index";
 
-const UserSchema = new Schema({
+type User = {
+  username: string;
+  email: string;
+  authentication: {
+    password: string;
+    salt: string;
+    sessionToken: string;
+  };
+};
+
+const UserSchema = new Schema<User>({
   username: { type: String, required: true },
   email: { type: String, required: true },
   authentication: {
